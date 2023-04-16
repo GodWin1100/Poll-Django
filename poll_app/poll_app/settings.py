@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,3 +125,24 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "default": {"format": "[%(asctime)s] %(name)s:%(levelname)s::%(funcName)s => %(message)s", "style": "%"}
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": f"./logs/DjangoLogger-{datetime.now().strftime('%Y-%m-%dT%H-%M-%S')}.log",
+            "formatter": "default",
+        },
+        "console": {"class": "logging.StreamHandler"},
+    },
+    "loggers": {
+        # "django": {"handlers": ["file", "console"], "level": "INFO", "propagate": True},
+        "django.server": {"handlers": ["file", "console"], "level": "INFO", "propagate": True},
+    },
+}
