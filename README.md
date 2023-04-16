@@ -3,6 +3,8 @@
 - User can create Poll
 - Vote for poll
 - View result of every poll
+- Log is maintained for every requests
+  - can be maintained for every events or for manual logging
 
 ---
 
